@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CivilDrawings</string>
+    <string name="button_to_get_current_location">Button to get Current Location</string>
 </resources>

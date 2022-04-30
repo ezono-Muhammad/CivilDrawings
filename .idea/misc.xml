@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/projects/android/CivilDrawings/app/src/main/res/layout/activity_main.xml" value="0.18541666666666667" />
+        <entry key="..\:/projects/android/CivilDrawings/app/src/main/res/layout/activity_test_map.xml" value="0.14010416666666667" />
         <entry key="..\:/projects/android/CivilDrawings/app/src/main/res/layout/fragment_maps.xml" value="0.18541666666666667" />
+        <entry key="..\:/projects/android/CivilDrawings/app/src/main/res/layout/gmap.xml" value="0.18541666666666667" />
       </map>
     </option>
   </component>
