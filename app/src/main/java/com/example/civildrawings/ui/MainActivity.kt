@@ -1,7 +1,8 @@
-package com.example.civildrawings
+package com.example.civildrawings.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.civildrawings.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
