@@ -7,7 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.civildrawings.R
+import com.example.civildrawings.databinding.FragmentMapsBinding
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,8 +18,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MapsFragment : Fragment() {
+    private lateinit var binding: FragmentMapsBinding
+    private lateinit var buttonGetCurrentLocation: FloatingActionButton
+    private lateinit var mapsFragmentViewModel: MapsFragmentViewModel
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -29,10 +37,10 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
 
-        Log.i(tag, "Ready")
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        Log.i(tag, "testing - maps ready")
+        val jena = LatLng(50.928610570437456, 11.597427035737676)
+        googleMap.addMarker(MarkerOptions().position(jena).title("Marker in Jena"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jena, 16F))
     }
 
     override fun onCreateView(
@@ -40,12 +48,20 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        binding = FragmentMapsBinding.inflate(layoutInflater, container, false)
+        mapsFragmentViewModel = ViewModelProvider(this)[MapsFragmentViewModel::class.java]
+        var view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
+
+        binding.btGetCurrentLocation.setOnClickListener {
+            mapsFragmentViewModel.getCurrentLocation()
+        }
     }
 }
