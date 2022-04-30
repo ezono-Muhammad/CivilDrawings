@@ -8,7 +8,7 @@ class MapsFragmentViewModel: ViewModel() {
 
 
     fun getCurrentLocation(){
-        Log.i(tag, "testing - getCurrentLocation")
+        Log.i(tag, "testing - current location from view model")
     }
 
 
