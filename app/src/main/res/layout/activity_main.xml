@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:labelVisibilityMode="unlabeled"
         android:id="@+id/bot_nav_view"
         android:layout_width="match_parent"
         android:layout_height="60sp"
