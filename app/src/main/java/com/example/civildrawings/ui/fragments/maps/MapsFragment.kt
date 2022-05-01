@@ -1,4 +1,4 @@
-package com.example.civildrawings.ui.fragments
+package com.example.civildrawings.ui.fragments.maps
 
 import android.Manifest
 import android.annotation.SuppressLint
