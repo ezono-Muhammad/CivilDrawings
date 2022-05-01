@@ -1,4 +1,4 @@
-package com.example.civildrawings.ui
+package com.example.civildrawings.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
