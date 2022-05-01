@@ -52,16 +52,24 @@ class MapsFragment : Fragment(), LifecycleObserver {
             ).show()
         }
 
+        mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
+            val markerName = marker
+            Log.i(tag, "testing - ${marker.position}")
+            Log.i(tag, "testing - ${marker.title}")
+            Log.i(tag, "testing - ${marker.id}")
+            Log.i(tag, "testing - ${marker.tag}")
+            false
+        }
+
+
         mMap.setOnMapLongClickListener {
             mMap.addMarker(MarkerOptions().position(it).title("Selected Building"))
-            Log.i(
-                tag,
-                "testing - long clicked on map latitude: ${it.latitude} , longitude: ${it.longitude}"
-            )
+            Log.i(tag,"testing - long clicked on map latitude: ${it.latitude} , longitude: ${it.longitude}")
         }
         if (currentLatLng != null) {
             goTOCurrentLocation(5F)
         }
+
     }
 
 
@@ -164,4 +172,5 @@ class MapsFragment : Fragment(), LifecycleObserver {
 
 
 }
+
 
