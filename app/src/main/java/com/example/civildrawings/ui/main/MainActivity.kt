@@ -1,10 +1,11 @@
 package com.example.civildrawings.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.Navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.civildrawings.R
@@ -27,8 +28,10 @@ class MainActivity : AppCompatActivity() {
         val botNavView: BottomNavigationView = binding.botNavView
         val navController = findNavController(R.id.nav_host_fragment)
 
-//        val appBarConfiguration = AppBarConfiguration(setOf(R.id.mapsFragment, R.id.sitesFragment))
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+        val toolBar= binding.toolbar
+        setSupportActionBar(toolBar)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.mapsFragment, R.id.sitesFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
         botNavView.setupWithNavController(navController)
 
     }

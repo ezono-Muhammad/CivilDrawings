@@ -8,11 +8,11 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.civildrawings.ui.fragments.maps.MapsFragment"
-        android:label="fragment_maps"
+        android:label="Maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
         android:id="@+id/sitesFragment"
         android:name="com.example.civildrawings.ui.fragments.sites.SitesFragment"
-        android:label="sites_fragment"
+        android:label="Sites"
         tools:layout="@layout/sites_fragment" />
 </navigation>
