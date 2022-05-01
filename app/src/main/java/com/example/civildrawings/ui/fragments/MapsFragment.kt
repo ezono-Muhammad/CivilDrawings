@@ -62,6 +62,7 @@ class MapsFragment : Fragment(), LifecycleObserver {
         }
 
 
+
         mMap.setOnMapLongClickListener {
             mMap.addMarker(MarkerOptions().position(it).title("Selected Building"))
             Log.i(tag,"testing - long clicked on map latitude: ${it.latitude} , longitude: ${it.longitude}")
@@ -118,7 +119,7 @@ class MapsFragment : Fragment(), LifecycleObserver {
         prepRequestLocation()
         val loc = LatLng(currentLatLng!!.latitude.toDouble(), currentLatLng!!.longitude.toDouble())
         mMap.addMarker(MarkerOptions().position(loc).title("Current Location"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, zoom))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, zoom))
     }
 
     private fun prepRequestLocation() {
