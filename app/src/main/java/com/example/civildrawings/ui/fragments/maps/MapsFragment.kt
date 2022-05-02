@@ -3,6 +3,7 @@ package com.example.civildrawings.ui.fragments.maps
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.LocationListener
 import android.os.Bundle
 import android.util.Log
@@ -51,6 +52,10 @@ class MapsFragment : Fragment(), LifecycleObserver {
         mMap.setOnMapClickListener {
             Log.i(tag,"testing - clicked on map ${it.latitude}, ${it.longitude}")
             Toast.makeText(requireActivity(),"Latitude: ${it.latitude} \n Longitude: ${it.longitude}",Toast.LENGTH_SHORT).show()
+            var geocoder: Geocoder = Geocoder(context)
+            var geoLoc = geocoder.getFromLocation(it.latitude, it.longitude, 1)[0]
+            Log.i(tag,"testing - geoLoc ${geoLoc.latitude}, ${geoLoc.longitude}")
+
         }
 
         mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
