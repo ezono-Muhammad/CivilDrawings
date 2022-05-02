@@ -3,13 +3,13 @@ package com.example.civildrawings.ui.fragments.maps
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.location.Location
 import android.location.LocationListener
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -40,16 +40,17 @@ class MapsFragment : Fragment(), LifecycleObserver {
     private val callback = OnMapReadyCallback { googleMap ->
         Log.i(tag, "testing - maps ready")
         mMap = googleMap
+        mMap.isMyLocationEnabled = true
+        val locationButton= (binding.root.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("2"))
+        val rlp=locationButton.layoutParams as (RelativeLayout.LayoutParams)
+        // position on right bottom
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,RelativeLayout.TRUE)
+        rlp.setMargins(0,0,30,30);
+
         mMap.setOnMapClickListener {
-            Log.i(
-                tag,
-                "testing - clicked on map latitude: ${it.latitude} , longitude: ${it.longitude}"
-            )
-            Toast.makeText(
-                requireActivity(),
-                "Latitude: ${it.latitude} \n Longitude: ${it.longitude}",
-                Toast.LENGTH_SHORT
-            ).show()
+            Log.i(tag,"testing - clicked on map ${it.latitude}, ${it.longitude}")
+            Toast.makeText(requireActivity(),"Latitude: ${it.latitude} \n Longitude: ${it.longitude}",Toast.LENGTH_SHORT).show()
         }
 
         mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
@@ -93,19 +94,6 @@ class MapsFragment : Fragment(), LifecycleObserver {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
-        locationListner = object : LocationListener {
-            override fun onLocationChanged(p0: Location) {
-                Log.i(tag, "testing - onLocationChanged")
-            }
-
-            @Deprecated("Deprecated in Java")
-            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-            }
-
-            override fun onProviderEnabled(provider: String) {}
-            override fun onProviderDisabled(provider: String) {}
-        }
 
         binding.btGetCurrentLocation.setOnClickListener {
             goTOCurrentLocation(18F)
