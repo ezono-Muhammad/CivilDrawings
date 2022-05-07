@@ -11,13 +11,16 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+
+        android:scaleType="fitXY"
         android:id="@+id/bt_getCurrentLocation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="25sp"
-        android:layout_marginBottom="25sp"
+        android:layout_marginEnd="5sp"
+        android:layout_marginBottom="55sp"
         android:contentDescription="@string/button_to_get_current_location"
-        android:src="@drawable/ic_baseline_my_location_24"/>
+        android:src="@drawable/ic_baseline_library_add_24"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
