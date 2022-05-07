@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.civildrawings.R
 import com.example.civildrawings.databinding.FragmentMapsBinding
 import com.example.civildrawings.dto.LocationDetails
@@ -42,19 +43,26 @@ class MapsFragment : Fragment(), LifecycleObserver {
         Log.i(tag, "testing - maps ready")
         mMap = googleMap
         mMap.isMyLocationEnabled = true
-        val locationButton= (binding.root.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("2"))
-        val rlp=locationButton.layoutParams as (RelativeLayout.LayoutParams)
+        val locationButton =
+            (binding.root.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(
+                Integer.parseInt("2")
+            )
+        val rlp = locationButton.layoutParams as (RelativeLayout.LayoutParams)
         // position on right bottom
-        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
-        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,RelativeLayout.TRUE)
-        rlp.setMargins(0,0,30,30);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+        rlp.setMargins(0, 0, 30, 30);
 
         mMap.setOnMapClickListener {
-            Log.i(tag,"testing - clicked on map ${it.latitude}, ${it.longitude}")
-            Toast.makeText(requireActivity(),"Latitude: ${it.latitude} \n Longitude: ${it.longitude}",Toast.LENGTH_SHORT).show()
+            Log.i(tag, "testing - clicked on map ${it.latitude}, ${it.longitude}")
+            Toast.makeText(
+                requireActivity(),
+                "Latitude: ${it.latitude} \n Longitude: ${it.longitude}",
+                Toast.LENGTH_SHORT
+            ).show()
             var geocoder: Geocoder = Geocoder(context)
             var geoLoc = geocoder.getFromLocation(it.latitude, it.longitude, 1)[0]
-            Log.i(tag,"testing - geoLoc ${geoLoc.latitude}, ${geoLoc.longitude}")
+            Log.i(tag, "testing - geoLoc ${geoLoc.latitude}, ${geoLoc.longitude}")
 
         }
 
@@ -71,11 +79,16 @@ class MapsFragment : Fragment(), LifecycleObserver {
 
         mMap.setOnMapLongClickListener {
             mMap.addMarker(MarkerOptions().position(it).title("Selected Building"))
-            Log.i(tag,"testing - long clicked on map latitude: ${it.latitude} , longitude: ${it.longitude}")
+            Log.i(
+                tag,
+                "testing - long clicked on map latitude: ${it.latitude} , longitude: ${it.longitude}"
+            )
+            binding.root.findNavController().navigate(R.id.sitesFragment)
         }
         if (currentLatLng != null) {
             goTOCurrentLocation(5F)
         }
+
 
     }
 
@@ -97,6 +110,8 @@ class MapsFragment : Fragment(), LifecycleObserver {
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        prepRequestLocation()
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
